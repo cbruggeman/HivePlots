@@ -54,7 +54,7 @@ makeHiveData <- function(data, groups=NULL){
   # you increase by n_obs. The modular part wraps around so the last axis pairs with the first
   # and the -1,+1 is to deal with the fact that R likes to be different and indexes things from 1
   id2 <- as.integer((id1+n_obs-1)%%(n_obs*n_axis)+1);
-  weight <- rep(2,n_obs*n_axis);
+  weight <- rep(0.1,n_obs*n_axis);
   color <- rep(sapply(groups,function(x) group_colors[x]), n_axis);
   edges <- data.frame(id1,id2,weight,color,stringsAsFactors=FALSE);
   
@@ -77,5 +77,5 @@ makeHiveData <- function(data, groups=NULL){
 
 plotHiveDF <- function(data, groups=NULL){
     hive_data <- makeHiveData(data, groups);
-    plotHive(HPD = hive_data, ch = 0.1, bkgnd = 'grey', axLabs = names(data))
+    plotHive(HPD = hive_data, ch = 0.01, bkgnd = 'grey', axLabs = names(data))
 }
